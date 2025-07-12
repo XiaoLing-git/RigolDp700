@@ -23,7 +23,10 @@ clean:
 
 commit:clean format check
 	git add .
-	git commit -e $(msg)
+	git commit -m "$(msg)"
+
+debug:
+	python $(CURDIR)/main.py
 
 echo:
 	@echo $(CURRENT_DIR)

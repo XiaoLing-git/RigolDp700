@@ -6,14 +6,14 @@
 Before you start it, please make sure you have installed the following tools
 
 - make
-- Poetry
+- poetry
 - black
 - mypy
 - ruff
 
 ## Commands
 
-### format Code
+### Format Code
 
 ```bash
 make format
@@ -31,6 +31,17 @@ make check
 make build
 ```
 
+### Install 
+
+```bash
+make install
+```
+
+### Enter Venv 
+
+```bash
+make shell
+```
 
 ### Clean
 
@@ -48,6 +59,12 @@ make commit
 
 ```bash
 make test
+```
+
+### debug
+
+```bash
+make debug
 ```
 
 
