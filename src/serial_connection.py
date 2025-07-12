@@ -1,5 +1,11 @@
+from pathlib import Path
+
 import serial  # type: ignore[import-untyped]
-from serial import Serial
+
+from .models import RESPONSE_END_TAG
+from .utils import logger
+
+CURRENT_FILE_NAME = Path(__file__).stem
 
 
 class SerialConnection:
@@ -8,26 +14,36 @@ class SerialConnection:
         self,
         port: str,
         baud: int = 9600,
-        data_bits: int = serial.EIGHTBITS,
+        bytesize: int = serial.EIGHTBITS,
         stop_bits: float = serial.STOPBITS_ONE,
         parity: str = serial.PARITY_NONE,
-        timeout: float = 2,
-    ):
-        self.__port = port
-        self.__baud = baud
-        self.__data_bits = data_bits
-        self.__stop_bits = stop_bits
-        self.__parity = parity
-        self.__timeout = timeout
-        self.__ser: Serial = Serial(
-            port=self.__port,
-            baudrate=self.__baud,
-            bytesize=self.__data_bits,
-            parity=self.__parity,
-            stopbits=self.__stop_bits,
-            timeout=self.__timeout,
+        timeout: float = 3,
+    ) -> None:
+        self.__ser: serial.Serial = serial.Serial(
+            port=port,
+            baudrate=baud,
+            bytesize=bytesize,
+            parity=parity,
+            stopbits=stop_bits,
+            timeout=timeout,
         )
 
-    def disconnect(self):
+    @property
+    def serial(self):
+        return self.__ser
+
+    def read(self) -> bytes:
+        response: bytes = self.__ser.read_until(RESPONSE_END_TAG.encode())
+        logger.debug(
+            f"{CURRENT_FILE_NAME}.{self.__class__.__name__} Read: {response!r}"
+        )
+        return response
+
+    def write(self, content: bytes):
+        logger.debug(f"{CURRENT_FILE_NAME}.{self.__class__.__name__} Send: {content!r}")
+        self.__ser.flush()
+        self.__ser.write(content)
+
+    def disconnect(self) -> None:
         if self.__ser.is_open:
             self.__ser.close()
