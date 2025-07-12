@@ -15,6 +15,10 @@ class BaseStatus(Enum):
     UNKNOWN = -1
 
 
+class Channel(Enum):
+    ch1 = "CH1"
+
+
 class InformationModel(BaseModel):
     model: str
     sn: str
@@ -69,6 +73,25 @@ class ServiceModel(BaseModel):
                 trigger=bool(int(response[0].strip())),
                 timer=bool(int(response[1].strip())),
                 other=bool(int(response[2].strip())),
+            )
+        except Exception as e:
+            raise ParseStrToModelException(e)
+
+
+class WorkStatusModel(BaseModel):
+    channel: Channel = Channel.ch1
+    voltage: float
+    current: float
+
+    @classmethod
+    def parse_str(cls, content: str):
+        try:
+            response: list[str] = content.strip().split(",")
+            if len(response) != 2:
+                msg: str = f"Get Current Work Status Fail, Original Content:{content}"
+                raise ParseStrToModelException(f"{msg}")
+            return cls(
+                voltage=float(response[0].strip()), current=float(response[1].strip())
             )
         except Exception as e:
             raise ParseStrToModelException(e)

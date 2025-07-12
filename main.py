@@ -11,4 +11,5 @@ if __name__ == '__main__':
 
     ser = GeneralCommandsConnection(port="COM7")
     ser.connect()
-    res = ser.reset()
+    res = ser.get_work_status().model_dump_json()
+    print(res)

@@ -2,7 +2,7 @@ from pathlib import Path
 
 from .commands import GeneralCommands
 from .errors import ResetException
-from .models import InformationModel, SelfCheckModel, ServiceModel
+from .models import InformationModel, SelfCheckModel, ServiceModel, WorkStatusModel
 from .serial_write_read import SerialWriteRead
 from .utils import logger
 
@@ -20,6 +20,11 @@ class GeneralCommandsConnection(SerialWriteRead):
         self.write(GeneralCommands.Self_Check)
         response: str = self.read()
         return SelfCheckModel.parse_str(response)
+
+    def get_work_status(self):
+        self.write(GeneralCommands.Work_Status)
+        response: str = self.read()
+        return WorkStatusModel.parse_str(response)
 
     def get_service(self) -> ServiceModel:
         self.write(GeneralCommands.Service)

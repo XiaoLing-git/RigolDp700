@@ -10,3 +10,4 @@ class GeneralCommands(Commands):
     Self_Check = "*TST?"
     Information = "*IDN?"
     Service = "*OPT?"
+    Work_Status = ":APPLy?"
