@@ -1,5 +1,8 @@
 # RigolDp700
- Support for Rigol DP700 Series power supplies.
+ Python Support for [Rigol DP700](https://www.rigolna.com/products/dc-power-loads/dp700/) Series power supplies.
+
+## Company
+https://www.rigolna.com/
 
 ## Notes:
 
