@@ -18,8 +18,12 @@ build: clean
 check:format
 	poetry run mypy  $(CURRENT_DIR)/src
 
-clean:
+clean:clean_pychche
 	rm -rf dist
+
+clean_pychche:
+	rm -rf __pycache__
+	rm -rf .mypy_cache
 
 commit:clean format check
 	git add .
