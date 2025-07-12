@@ -24,6 +24,7 @@ clean:
 commit:clean format check
 	git add .
 	git commit -m "$(msg)"
+	git push
 
 debug:
 	python $(CURDIR)/main.py
