@@ -52,7 +52,7 @@ make clean
 ### Commit To Github
 
 ```bash
-make commit
+make commit msg="comments"
 ```
 
 ### Test
