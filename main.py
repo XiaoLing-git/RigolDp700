@@ -15,6 +15,5 @@ if __name__ == '__main__':
 
     ser.disconnect()
 
-    ser.connect()
     ser.write("*oPT?")
     ser.read()

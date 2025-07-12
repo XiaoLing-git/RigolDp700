@@ -60,7 +60,7 @@ class SerialWriteRead:
                     f"{CURRENT_FILE_NAME}.{self.__class__.__name__} Serial Port Connected Already"
                 )
         except Exception as e:
-            logger.debug(
+            logger.warn(
                 f"{CURRENT_FILE_NAME}.{self.__class__.__name__} Connection Error, Msg = {e}"
             )
             raise SerialConnectError(f"Connection Error, Msg = {e}")
@@ -78,7 +78,7 @@ class SerialWriteRead:
     def read(self) -> str:
         if self.serial is not None and self.serial.serial.is_open:
             return self.serial.read().decode()
-        logger.debug(
+        logger.warn(
             f"{CURRENT_FILE_NAME}.{self.__class__.__name__} Try Read Data Before Connected"
         )
         raise SerialConnectError("Try Read Data Before Connected")
@@ -88,7 +88,7 @@ class SerialWriteRead:
         if self.serial is not None and self.serial.serial.is_open:
             self.serial.write(cmd.encode())
             return
-        logger.debug(
+        logger.warn(
             f"{CURRENT_FILE_NAME}.{self.__class__.__name__} Try Read Data Before Connected"
         )
         raise SerialConnectError("Try Write Data Before Connected")

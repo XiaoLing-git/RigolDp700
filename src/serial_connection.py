@@ -29,7 +29,7 @@ class SerialConnection:
         )
 
     @property
-    def serial(self):
+    def serial(self) -> serial.Serial:
         return self.__ser
 
     def read(self) -> bytes:
