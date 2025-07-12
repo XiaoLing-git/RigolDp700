@@ -1,8 +1,12 @@
 from enum import Enum
+from pathlib import Path
 
 from pydantic import BaseModel
 
 from src.errors import ParseStrToModelException
+from src.utils import logger
+
+CURRENT_FILE_NAME = Path(__file__).stem
 
 RESPONSE_END_TAG: str = "\n"
 
@@ -88,10 +92,12 @@ class WorkStatusModel(BaseModel):
         try:
             response: list[str] = content.strip().split(",")
             if len(response) != 2:
-                msg: str = f"Get Current Work Status Fail, Original Content:{content}"
-                raise ParseStrToModelException(f"{msg}")
+                raise ParseStrToModelException(
+                    f"Get Current Work Status Fail, Original Content:{content}"
+                )
             return cls(
                 voltage=float(response[0].strip()), current=float(response[1].strip())
             )
         except Exception as e:
+            logger.warn(e)
             raise ParseStrToModelException(e)

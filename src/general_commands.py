@@ -21,7 +21,7 @@ class GeneralCommandsConnection(SerialWriteRead):
         response: str = self.read()
         return SelfCheckModel.parse_str(response)
 
-    def get_work_status(self):
+    def get_work_status(self) -> WorkStatusModel:
         self.write(GeneralCommands.Work_Status)
         response: str = self.read()
         return WorkStatusModel.parse_str(response)
@@ -31,7 +31,7 @@ class GeneralCommandsConnection(SerialWriteRead):
         response: str = self.read()
         return ServiceModel.parse_str(response)
 
-    def reset(self):
+    def reset(self) -> None:
         try:
             self.write(GeneralCommands.Reset)
         except Exception as e:
