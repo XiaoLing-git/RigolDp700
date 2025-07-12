@@ -28,6 +28,8 @@ clean_pychche:
 commit:clean format check
 	git add .
 	git commit -m "$(msg)"
+
+push:commit
 	git push
 
 debug:
