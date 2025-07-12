@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "rigol-dp700"
+version = "0.1.0"
+description = "support pyserial control for Rigol DP700 series power supply"
+authors = ["xiaoling <samuel.ling.xiao@qq.com>"]
+readme = "README.md"
+packages = [{include = "src/*"}]
+
+[tool.poetry.dependencies]
+python = "3.10.11"
+pyserial = "^3.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
