@@ -2,6 +2,7 @@ from pathlib import Path
 
 import serial  # type: ignore[import-untyped]
 
+from .commands import Commands
 from .errors import SerialConnectError
 from .models import COMMAND_END_TAG
 from .serial_connection import SerialConnection
@@ -83,7 +84,8 @@ class SerialWriteRead:
         )
         raise SerialConnectError("Try Read Data Before Connected")
 
-    def write(self, cmd: str) -> None:
+    def write(self, cmd: str | Commands) -> None:
+        cmd = cmd.value if isinstance(cmd, Commands) else cmd
         cmd = cmd if cmd.endswith(COMMAND_END_TAG) else cmd + COMMAND_END_TAG
         if self.serial is not None and self.serial.serial.is_open:
             self.serial.write(cmd.encode())

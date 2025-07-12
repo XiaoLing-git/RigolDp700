@@ -1,3 +1,74 @@
+from enum import Enum
+
+from pydantic import BaseModel
+
+from src.errors import ParseStrToModelException
+
 RESPONSE_END_TAG: str = "\n"
 
 COMMAND_END_TAG: str = "\n"
+
+
+class BaseStatus(Enum):
+    PASS = 1
+    FAIL = 0
+    UNKNOWN = -1
+
+
+class InformationModel(BaseModel):
+    model: str
+    sn: str
+    version: str
+
+    @classmethod
+    def parse_str(cls, content: str):
+        try:
+            response: list[str] = content.strip().split(",")
+            cls.model = response[1]
+            cls.sn = response[2]
+            cls.version = response[3]
+            return cls(
+                model=response[1].strip(),
+                sn=response[2].strip(),
+                version=response[3].strip(),
+            )
+        except Exception as e:
+            raise ParseStrToModelException(e)
+
+
+class SelfCheckModel(BaseModel):
+    fan: BaseStatus
+
+    @classmethod
+    def parse_str(cls, content: str):
+        try:
+            response: list[str] = content.strip().split(":")
+            results: str = response[1].strip().lower()
+            if "pass" in results:
+                statue = BaseStatus.PASS
+            elif "fail" in results:
+                statue = BaseStatus.FAIL
+            else:
+                statue = BaseStatus.UNKNOWN
+            return cls(fan=statue)
+        except Exception as e:
+            raise ParseStrToModelException(e)
+
+
+class ServiceModel(BaseModel):
+    trigger: bool
+    timer: bool
+    other: bool
+
+    @classmethod
+    def parse_str(cls, content: str):
+        try:
+            response: list[str] = content.strip().split(",")
+
+            return cls(
+                trigger=bool(int(response[0].strip())),
+                timer=bool(int(response[1].strip())),
+                other=bool(int(response[2].strip())),
+            )
+        except Exception as e:
+            raise ParseStrToModelException(e)

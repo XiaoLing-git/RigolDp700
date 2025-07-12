@@ -23,3 +23,11 @@ class SerialReadConnectError(SerialException):
 
 class SerialWriteConnectError(SerialException):
     pass
+
+
+class ParseStrToModelException(SerialException):
+    pass
+
+
+class ResetException(SerialException):
+    pass
