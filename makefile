@@ -19,11 +19,13 @@ check:format
 	poetry run mypy  $(CURRENT_DIR)/src
 
 clean:clean_pychche
-	rm -rf dist
+	rm -rf $(CURRENT_DIR)/dist
 
 clean_pychche:
-	rm -rf __pycache__
-	rm -rf .mypy_cache
+	rm -rf $(CURRENT_DIR)/__pycache__
+	rm -rf $(CURRENT_DIR)/.mypy_cache
+	rm -rf $(CURRENT_DIR)/__pycache__/*
+	rm -rf $(CURRENT_DIR)/.mypy_cache/*
 
 commit:clean format check
 	git add .
