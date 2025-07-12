@@ -15,7 +15,7 @@ depend:shell
 build: clean
 	poetry build
 
-check:
+check:format
 	poetry run mypy  $(CURRENT_DIR)/src
 
 clean:
