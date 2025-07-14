@@ -12,6 +12,14 @@ RESPONSE_END_TAG: str = "\n"
 
 COMMAND_END_TAG: str = "\n"
 
+# Unit = V
+MAX_VOLTAGE = 32
+MIN_VOLTAGE = 0
+
+# Unit = A
+MAX_CURRENT = 5
+MIN_CURRENT = 0
+
 
 class BaseStatus(Enum):
     PASS = 1
@@ -110,6 +118,11 @@ class ApplyStatusModel(BaseModel):
             device_logger.warn(e)
             raise ParseStrToModelException(e)
 
+    def __str__(self):
+        return (
+            f"channel={self.channel} voltage={self.voltage} V current={self.current} A"
+        )
+
 
 class CurrentWorkStatusModel(BaseModel):
     channel: Channel = Channel.ch1
@@ -141,3 +154,6 @@ class CurrentWorkStatusModel(BaseModel):
         except Exception as e:
             device_logger.warn(e)
             raise ParseStrToModelException(e)
+
+    def __str__(self):
+        return f"channel={self.channel} voltage={self.voltage} V current={self.current} A power={self.power} W"

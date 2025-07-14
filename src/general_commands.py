@@ -21,11 +21,6 @@ class GeneralCommandsConnection(SerialWriteRead):
         response: str = self.read()
         return SelfCheckModel.parse_str(response)
 
-    def get_apply_status(self) -> ApplyStatusModel:
-        self.write(GeneralCommands.Work_Status)
-        response: str = self.read()
-        return ApplyStatusModel.parse_str(response)
-
     def get_service(self) -> ServiceModel:
         self.write(GeneralCommands.Service)
         response: str = self.read()

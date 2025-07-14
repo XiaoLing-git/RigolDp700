@@ -10,8 +10,10 @@ class GeneralCommands(Commands):
     Self_Check = "*TST?"
     Information = "*IDN?"
     Service = "*OPT?"
-    Work_Status = ":APPLy?"
 
 
 class CommonCommands(Commands):
-    CURRENT_STATUS = "MEASure:ALL? "
+
+    APPLY_STATUS = ":APPLy?"
+    APPLY_SETUP = ":APPLy"
+    CURRENT_STATUS = "MEASure:ALL?"

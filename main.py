@@ -13,5 +13,5 @@ if __name__ == '__main__':
 
     ser = Driver(port="COM7")
     ser.connect()
-    res = ser.get_current_status("CH1")
+    res = ser.apply_set(voltage=10,current=3,chl="CH1")
     print(res)

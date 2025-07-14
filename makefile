@@ -38,4 +38,4 @@ debug:
 	python $(CURDIR)/main.py
 
 echo:
-	@echo $(CURRENT_DIR)
+	@ech o $(CURRENT_DIR)
