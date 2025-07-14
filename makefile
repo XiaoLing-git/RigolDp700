@@ -24,8 +24,8 @@ clean:clean_pychche
 clean_pychche:
 	rm -rf $(CURRENT_DIR)/__pycache__
 	rm -rf $(CURRENT_DIR)/.mypy_cache
-#	rm -rf $(CURRENT_DIR)/__pycache__/*
-#	rm -rf $(CURRENT_DIR)/.mypy_cache/*
+	rm -rf $(CURRENT_DIR)/__pycache__/*
+	rm -rf $(CURRENT_DIR)/.mypy_cache/*
 
 commit:clean format check
 	git add .
