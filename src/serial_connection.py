@@ -3,7 +3,7 @@ from pathlib import Path
 import serial  # type: ignore[import-untyped]
 
 from .models import RESPONSE_END_TAG
-from .utils import serial_connection_logger
+from .logger import serial_connection_logger
 
 CURRENT_FILE_NAME = Path(__file__).stem
 
