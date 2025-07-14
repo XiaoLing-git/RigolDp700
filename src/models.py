@@ -13,18 +13,28 @@ RESPONSE_END_TAG: str = "\n"
 COMMAND_END_TAG: str = "\n"
 
 # Unit = V
-MAX_VOLTAGE = 32
-MIN_VOLTAGE = 0
+MAX_VOLTAGE: float = 32
+MIN_VOLTAGE: float = 0
 
 # Unit = A
-MAX_CURRENT = 5
-MIN_CURRENT = 0
+MAX_CURRENT: float = 5.3
+MIN_CURRENT: float = 0
 
 
 class BaseStatus(Enum):
     PASS = 1
     FAIL = 0
     UNKNOWN = -1
+
+
+class WorkStatus(Enum):
+    ON = "ON"
+    OFF = "OFF"
+
+
+class AlarmStatus(Enum):
+    Yes = "YES"
+    No = "NO"
 
 
 class Channel(Enum):

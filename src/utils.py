@@ -3,9 +3,11 @@ from .models import Channel, MAX_CURRENT, MIN_CURRENT, MIN_VOLTAGE, MAX_VOLTAGE
 from .logger import device_logger
 
 
-def assert_channel_setup(chl: str | Channel):
+def assert_channel_setup(chl: str | Channel) -> str:
     if isinstance(chl, Channel) or chl in [i.value for i in list(Channel)]:
-        return
+        if isinstance(chl, Channel):
+            chl = chl.value
+        return chl
     error_msg = f"{chl} is not currently supported"
     device_logger.warn(error_msg)
     raise ChannelNotExistException(error_msg)
