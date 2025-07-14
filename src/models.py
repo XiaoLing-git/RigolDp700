@@ -167,3 +167,6 @@ class CurrentWorkStatusModel(BaseModel):
 
     def __str__(self):
         return f"channel={self.channel} voltage={self.voltage} V current={self.current} A power={self.power} W"
+
+
+OP_INFO = dict[str, dict[str, AlarmStatus | WorkStatus | float]]

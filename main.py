@@ -25,5 +25,8 @@ if __name__ == '__main__':
     res = ser.current_status(chl="CH1")
     print(res)
 
-    res = ser.get_alarm_info(chl="CH1")
+    res = ser.get_op_info(chl="CH1")
     print(res)
+
+    # res = ser.get_op_setup(chl="CH1")
+    # print(res)

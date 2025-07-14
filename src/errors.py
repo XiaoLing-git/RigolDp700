@@ -35,3 +35,7 @@ class ResetException(SerialException):
 
 class ChannelNotExistException(SerialException):
     pass
+
+
+class ClearAlarmException(SerialException):
+    pass

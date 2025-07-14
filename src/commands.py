@@ -19,5 +19,18 @@ class CommonCommands(Commands):
     CURRENT_STATUS = "MEASure:ALL?"
     CHANNEL_STATUS = ":OUTPut?"
     CHANNEL_SETUP = ":OUTPut"
-    OCP_CHECK = ":OUTPut:OCP:ALAR?"
-    OVP_CHECK = ":OUTPut:OVP:ALAR?"
+
+    OCP_STATUS = ":OUTPut:OCP?"
+    OVP_STATUS = ":OUTPut:OVP?"
+
+    OCP_ALARM = ":OUTPut:OCP:ALAR?"
+    OVP_ALARM = ":OUTPut:OVP:ALAR?"
+
+    OCP_CHECK = ":OUTPut:OCP:VALUE?"
+    OVP_CHECK = ":OUTPut:OVP:VALUE?"
+
+    OCP_SETUP = ":OUTPut:OCP:VALUE"
+    OVP_SETUP = ":OUTPut:OVP:VALUE"
+
+    OCP_CLEAR = ":OUTPut:OCP:CLEAR"
+    OVP_CLEAR = ":OUTPut:OVP:CLEAR"
