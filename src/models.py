@@ -4,7 +4,7 @@ from pathlib import Path
 from pydantic import BaseModel
 
 from src.errors import ParseStrToModelException
-from src.utils import logger
+from src.utils import device_logger
 
 CURRENT_FILE_NAME = Path(__file__).stem
 
@@ -99,5 +99,5 @@ class WorkStatusModel(BaseModel):
                 voltage=float(response[0].strip()), current=float(response[1].strip())
             )
         except Exception as e:
-            logger.warn(e)
+            device_logger.warn(e)
             raise ParseStrToModelException(e)

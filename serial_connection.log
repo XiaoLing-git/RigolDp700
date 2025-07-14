@@ -1,0 +1,4 @@
+2025-07-14 14:36:44,184 DEBUG line:39 GeneralCommandsConnection Serial Port Connecting~~~
+2025-07-14 14:36:44,289 DEBUG line:48 serial_write_read.GeneralCommandsConnection Serial Port Connected Already
+2025-07-14 14:36:44,289 DEBUG line:43 serial_connection.SerialConnection Send: b':APPLy?\n'
+2025-07-14 14:36:44,309 DEBUG line:37 serial_connection.SerialConnection Read: b'0.00,5.00\n'

@@ -6,7 +6,7 @@ from .commands import Commands
 from .errors import SerialConnectError
 from .models import COMMAND_END_TAG
 from .serial_connection import SerialConnection
-from .utils import logger
+from .utils import serial_write_read_logger as logger
 
 CURRENT_FILE_NAME = Path(__file__).stem
 
@@ -36,7 +36,9 @@ class SerialWriteRead:
     def connect(self) -> None:
         try:
             if self.serial is None:
-                logger.debug(f"{self.__class__.__name__} Serial Port Connecting~~~")
+                logger.debug(
+                    f"{CURRENT_FILE_NAME}.{self.__class__.__name__} Serial Port Connecting~~~"
+                )
                 self.__ser = SerialConnection(
                     port=self.__port,
                     baud=self.__baud,

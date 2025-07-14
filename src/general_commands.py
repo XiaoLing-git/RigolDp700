@@ -4,7 +4,7 @@ from .commands import GeneralCommands
 from .errors import ResetException
 from .models import InformationModel, SelfCheckModel, ServiceModel, WorkStatusModel
 from .serial_write_read import SerialWriteRead
-from .utils import logger
+from .utils import serial_write_read_logger
 
 CURRENT_FILE_NAME = Path(__file__).stem
 
@@ -38,8 +38,10 @@ class GeneralCommandsConnection(SerialWriteRead):
             msg: str = (
                 f"System Error While Send Reset Command |{GeneralCommands.Reset}| msg={e}"
             )
-            logger.warn(f"{CURRENT_FILE_NAME}.{self.__class__.__name__} {msg}")
+            serial_write_read_logger.warn(
+                f"{CURRENT_FILE_NAME}.{self.__class__.__name__} {msg}"
+            )
             raise ResetException(msg)
-        logger.warn(
+        serial_write_read_logger.warn(
             f"{CURRENT_FILE_NAME}.{self.__class__.__name__} System Reset Command Send OK"
         )
