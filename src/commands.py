@@ -11,3 +11,7 @@ class GeneralCommands(Commands):
     Information = "*IDN?"
     Service = "*OPT?"
     Work_Status = ":APPLy?"
+
+
+class CommonCommands(Commands):
+    CURRENT_STATUS = "MEASure:ALL? "

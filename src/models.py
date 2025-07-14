@@ -82,22 +82,62 @@ class ServiceModel(BaseModel):
             raise ParseStrToModelException(e)
 
 
-class WorkStatusModel(BaseModel):
+class ApplyStatusModel(BaseModel):
     channel: Channel = Channel.ch1
     voltage: float
     current: float
 
     @classmethod
-    def parse_str(cls, content: str):
+    def parse_str(cls, content: str, chl: Channel | None = None):
         try:
             response: list[str] = content.strip().split(",")
             if len(response) != 2:
                 raise ParseStrToModelException(
+                    f"Get Apply Status Fail, Original Content:{content}"
+                )
+            if chl is None:
+                return cls(
+                    voltage=float(response[0].strip()),
+                    current=float(response[1].strip()),
+                )
+            else:
+                return cls(
+                    channel=chl,
+                    voltage=float(response[0].strip()),
+                    current=float(response[1].strip()),
+                )
+        except Exception as e:
+            device_logger.warn(e)
+            raise ParseStrToModelException(e)
+
+
+class CurrentWorkStatusModel(BaseModel):
+    channel: Channel = Channel.ch1
+    voltage: float
+    current: float
+    power: float
+
+    @classmethod
+    def parse_str(cls, content: str, chl: Channel | None = None):
+        try:
+            response: list[str] = content.strip().split(",")
+            if len(response) != 3:
+                raise ParseStrToModelException(
                     f"Get Current Work Status Fail, Original Content:{content}"
                 )
-            return cls(
-                voltage=float(response[0].strip()), current=float(response[1].strip())
-            )
+            if chl is None:
+                return cls(
+                    voltage=float(response[0].strip()),
+                    current=float(response[1].strip()),
+                    power=float(response[2].strip()),
+                )
+            else:
+                return cls(
+                    channel=chl,
+                    voltage=float(response[0].strip()),
+                    current=float(response[1].strip()),
+                    power=float(response[2].strip()),
+                )
         except Exception as e:
             device_logger.warn(e)
             raise ParseStrToModelException(e)

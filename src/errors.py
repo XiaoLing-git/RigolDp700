@@ -31,3 +31,7 @@ class ParseStrToModelException(SerialException):
 
 class ResetException(SerialException):
     pass
+
+
+class ChannelNotExistException(SerialException):
+    pass
