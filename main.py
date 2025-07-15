@@ -25,6 +25,18 @@ if __name__ == '__main__':
     res = ser.current_status(chl="CH1")
     print(res)
 
+    res = ser.ocp_setup(5.2)
+    print(res)
+
+    res = ser.ovp_setup(20)
+    print(res)
+
+    res = ser.turn_ocp_off()
+    print(res)
+
+    res = ser.turn_ovp_on()
+    print(res)
+
     res = ser.get_op_info(chl="CH1")
     print(res)
 

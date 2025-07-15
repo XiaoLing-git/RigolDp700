@@ -29,6 +29,9 @@ class CommonCommands(Commands):
     OCP_CHECK = ":OUTPut:OCP:VALUE?"
     OVP_CHECK = ":OUTPut:OVP:VALUE?"
 
+    OCP_CONTROL = ":OUTPut:OCP"
+    OVP_CONTROL = ":OUTPut:OVP"
+
     OCP_SETUP = ":OUTPut:OCP:VALUE"
     OVP_SETUP = ":OUTPut:OVP:VALUE"
 

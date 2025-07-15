@@ -13,7 +13,12 @@ from .models import (
 )
 from .serial_write_read import SerialWriteRead
 from .logger import device_logger, serial_write_read_logger
-from .utils import assert_channel_setup, assert_apply_setup, assert_ocp_setup
+from .utils import (
+    assert_channel_setup,
+    assert_apply_setup,
+    assert_ocp_setup,
+    assert_ovp_setup,
+)
 
 CURRENT_FILE_NAME = Path(__file__).stem
 
@@ -142,6 +147,37 @@ class CommonCommandsConnection(SerialWriteRead):
         chl = assert_channel_setup(chl)
         assert_ocp_setup(setup)
         cmd = f"{CommonCommands.OCP_SETUP.value} {chl},{setup}"
+        self.write(cmd)
+        return self.get_ocp_value()
+
+    def turn_ocp_on(self, chl: str | Channel = Channel.ch1):
+        chl = assert_channel_setup(chl)
+        cmd = f"{CommonCommands.OCP_CONTROL.value} {chl},{WorkStatus.ON.value}"
+        self.write(cmd)
+        return self.get_ocp_value()
+
+    def turn_ocp_off(self, chl: str | Channel = Channel.ch1):
+        chl = assert_channel_setup(chl)
+        cmd = f"{CommonCommands.OCP_CONTROL.value} {chl},{WorkStatus.OFF.value}"
+        self.write(cmd)
+        return self.get_ocp_value()
+
+    def turn_ovp_on(self, chl: str | Channel = Channel.ch1):
+        chl = assert_channel_setup(chl)
+        cmd = f"{CommonCommands.OVP_CONTROL.value} {chl},{WorkStatus.ON.value}"
+        self.write(cmd)
+        return self.get_ocp_value()
+
+    def turn_ovp_off(self, chl: str | Channel = Channel.ch1):
+        chl = assert_channel_setup(chl)
+        cmd = f"{CommonCommands.OVP_CONTROL.value} {chl},{WorkStatus.OFF.value}"
+        self.write(cmd)
+        return self.get_ocp_value()
+
+    def ovp_setup(self, setup: float, chl: str | Channel = Channel.ch1):
+        chl = assert_channel_setup(chl)
+        assert_ovp_setup(setup)
+        cmd = f"{CommonCommands.OVP_SETUP.value} {chl},{setup}"
         self.write(cmd)
         return self.get_ocp_value()
 
