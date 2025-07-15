@@ -3,8 +3,8 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
-from src.errors import ParseStrToModelException
-from src.logger import device_logger
+from .errors import ParseStrToModelException
+from .logger import device_logger
 
 CURRENT_FILE_NAME = Path(__file__).stem
 
