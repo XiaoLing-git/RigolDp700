@@ -2,10 +2,20 @@ from enum import Enum
 
 
 class Commands(Enum):
+    """Base Command Class for device."""
+
     pass
 
 
 class GeneralCommands(Commands):
+    """
+    General Command Class for device.
+    Reset : reset device command
+    Self_Check : make device self check command
+    Information : get device information
+    Service : get device supported services
+    """
+
     Reset = "*RST"
     Self_Check = "*TST?"
     Information = "*IDN?"
@@ -13,6 +23,7 @@ class GeneralCommands(Commands):
 
 
 class CommonCommands(Commands):
+    """General Command Class for device."""
 
     APPLY_STATUS = ":APPLy?"
     APPLY_SETUP = ":APPLy"
