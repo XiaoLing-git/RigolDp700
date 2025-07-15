@@ -1,9 +1,14 @@
-from .errors import ChannelNotExistException
+from .errors import ChannelNotExistException, ApplySetupError
 from .models import Channel, MAX_CURRENT, MIN_CURRENT, MIN_VOLTAGE, MAX_VOLTAGE
 from .logger import device_logger
 
 
 def assert_channel_setup(chl: str | Channel) -> str:
+    """
+    Assert that channel input is supported,
+    :param chl: str or Channel
+    :return: if supported return str, if no raise ChannelNotExistException
+    """
     if isinstance(chl, Channel) or chl in [i.value for i in list(Channel)]:
         if isinstance(chl, Channel):
             chl = chl.value
@@ -14,6 +19,12 @@ def assert_channel_setup(chl: str | Channel) -> str:
 
 
 def assert_apply_setup(current: float, voltage: float):
+    """
+    Setting value verification
+    :param current: 0 < value 5.3 A
+    :param voltage: 0 < value 32 V
+    :return: if everything is ok return None otherwise raise ApplySetupError
+    """
     if MIN_CURRENT <= current <= MAX_CURRENT and MIN_VOLTAGE < voltage <= MAX_VOLTAGE:
         return
     error_msg = (
@@ -21,10 +32,15 @@ def assert_apply_setup(current: float, voltage: float):
         f"{MIN_CURRENT}<=Current<={MAX_CURRENT} | {MIN_VOLTAGE}<=Voltage<={MAX_VOLTAGE}"
     )
     device_logger.warn(error_msg)
-    raise ChannelNotExistException(error_msg)
+    raise ApplySetupError(error_msg)
 
 
 def assert_ocp_setup(current: float):
+    """
+    Setting value verification
+    :param current: 0 < value 5.3 A
+    :return: if everything is ok return None otherwise raise ApplySetupError
+    """
     if MIN_CURRENT + 0.01 <= current <= MAX_CURRENT - 0.01:
         return
     error_msg = (
@@ -32,10 +48,15 @@ def assert_ocp_setup(current: float):
         f"{MIN_CURRENT} <= Current <= {MAX_CURRENT}"
     )
     device_logger.warn(error_msg)
-    raise ChannelNotExistException(error_msg)
+    raise ApplySetupError(error_msg)
 
 
 def assert_ovp_setup(voltage: float):
+    """
+    Setting value verification
+    :param voltage: 0 < value 32 V
+    :return: if everything is ok return None otherwise raise ApplySetupError
+    """
     if MIN_VOLTAGE + 0.01 <= voltage <= MAX_VOLTAGE - 0.01:
         return
     error_msg = (
@@ -43,4 +64,4 @@ def assert_ovp_setup(voltage: float):
         f"{MIN_VOLTAGE + 0.01} <= Voltage <= {MAX_VOLTAGE - 0.01}"
     )
     device_logger.warn(error_msg)
-    raise ChannelNotExistException(error_msg)
+    raise ApplySetupError(error_msg)

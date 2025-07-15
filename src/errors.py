@@ -37,5 +37,9 @@ class ChannelNotExistException(SerialException):
     pass
 
 
+class ApplySetupError(SerialException):
+    pass
+
+
 class ClearAlarmException(SerialException):
     pass
