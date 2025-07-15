@@ -22,17 +22,23 @@ MIN_CURRENT: float = 0
 
 
 class BaseStatus(Enum):
+    """Base Status."""
+
     PASS = 1
     FAIL = 0
     UNKNOWN = -1
 
 
 class WorkStatus(Enum):
+    """Work Status."""
+
     ON = "ON"
     OFF = "OFF"
 
 
 class AlarmStatus(Enum):
+    """Alarm Status."""
+
     Yes = "YES"
     No = "NO"
 
@@ -42,6 +48,10 @@ class Channel(Enum):
 
 
 class InformationModel(BaseModel):
+    """
+    Parse |Command:GeneralCommands.Information| response text and format the output
+    """
+
     model: str
     sn: str
     version: str
@@ -63,6 +73,10 @@ class InformationModel(BaseModel):
 
 
 class SelfCheckModel(BaseModel):
+    """
+    Parse |Command:GeneralCommands.Self_Check| response text and format the output
+    """
+
     fan: BaseStatus
 
     @classmethod
@@ -82,6 +96,10 @@ class SelfCheckModel(BaseModel):
 
 
 class ServiceModel(BaseModel):
+    """
+    Parse |Command:GeneralCommands.Service| response text and format the output
+    """
+
     trigger: bool
     timer: bool
     other: bool
@@ -101,6 +119,10 @@ class ServiceModel(BaseModel):
 
 
 class ApplyStatusModel(BaseModel):
+    """
+    Parse |Command:CommonCommands.APPLY_STATUS| response text and format the output
+    """
+
     channel: Channel = Channel.ch1
     voltage: float
     current: float
@@ -135,6 +157,10 @@ class ApplyStatusModel(BaseModel):
 
 
 class CurrentWorkStatusModel(BaseModel):
+    """
+    Parse |Command:CommonCommands.CURRENT_STATUS| response text and format the output
+    """
+
     channel: Channel = Channel.ch1
     voltage: float
     current: float
