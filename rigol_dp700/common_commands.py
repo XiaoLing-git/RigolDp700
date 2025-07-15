@@ -49,6 +49,33 @@ class CommonCommandsConnection(SerialWriteRead):
         self.write(cmd)
         return self.apply_status()
 
+    def engage_apply_setup(self, chl: str | Channel = Channel.ch1) -> ApplyStatusModel:
+        """
+        enable apply setup
+        :param chl: default CH1
+        :return: ApplyStatusModel
+        """
+        chl = assert_channel_setup(chl)
+
+        cmd: str = f"{CommonCommands.TURN_ON.value} {chl},{WorkStatus.ON.value}"
+        self.write(cmd)
+        return self.apply_status()
+
+    def disengage_apply_setup(
+        self, chl: str | Channel = Channel.ch1
+    ) -> ApplyStatusModel:
+        """
+        enable apply setup
+        :param chl: default CH1
+        :return: ApplyStatusModel
+        """
+        chl = assert_channel_setup(chl)
+
+        cmd: str = f"{CommonCommands.TURN_OFF.value} {chl},{WorkStatus.OFF.value}"
+        print(cmd)
+        self.write(cmd)
+        return self.apply_status()
+
     def current_status(
         self, chl: str | Channel = Channel.ch1
     ) -> CurrentWorkStatusModel:

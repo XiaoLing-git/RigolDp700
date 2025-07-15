@@ -31,6 +31,9 @@ class CommonCommands(Commands):
     CHANNEL_STATUS = ":OUTPut?"
     CHANNEL_SETUP = ":OUTPut"
 
+    TURN_ON = ":OUTPut:STATe"
+    TURN_OFF = ":OUTPut:STATe"
+
     OCP_STATUS = ":OUTPut:OCP?"
     OVP_STATUS = ":OUTPut:OVP?"
 
