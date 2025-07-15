@@ -1,7 +1,7 @@
 CURRENT_DIR = $(CURDIR)
 
 format:
-	poetry run black $(CURRENT_DIR)/src
+	poetry run black $(CURRENT_DIR)/rigol_dp700
 
 install:
 	poetry install
@@ -16,7 +16,7 @@ build: clean
 	poetry build
 
 check:format
-	poetry run mypy  $(CURRENT_DIR)/src
+	poetry run mypy  $(CURRENT_DIR)/rigol_dp700
 
 clean:clean_pychche
 	rm -rf $(CURRENT_DIR)/dist
