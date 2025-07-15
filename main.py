@@ -1,4 +1,4 @@
-from rigol_dp700 import Driver
+from rigol_dp700 import Driver, WorkStatus
 
 if __name__ == '__main__':
 
@@ -9,7 +9,7 @@ if __name__ == '__main__':
     res = ser.apply_status()
     print(res)
 
-    res = ser.apply_set(voltage=10,current=3,chl="CH1")
+    res = ser.apply_setup(voltage=10,current=3,chl="CH1")
     print(res)
     res = ser.get_channel_status()
     print(res)
