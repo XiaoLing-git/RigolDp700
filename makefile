@@ -27,6 +27,11 @@ clean_pychche:
 	rm -rf $(CURRENT_DIR)/__pycache__/*
 	rm -rf $(CURRENT_DIR)/.mypy_cache/*
 
+	rm -rf $(CURRENT_DIR)/rigol_dp700/__pycache__
+	rm -rf $(CURRENT_DIR)/rigol_dp700/.mypy_cache
+	rm -rf $(CURRENT_DIR)/rigol_dp700/__pycache__/*
+	rm -rf $(CURRENT_DIR)/rigol_dp700/.mypy_cache/*
+
 commit:clean format check
 	git add .
 	git commit -m "$(msg)"

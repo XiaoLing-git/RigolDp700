@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rigol-dp700"
-version = "0.1.0"
+version = "1.0.0"
 description = "Support serial control for Rigol DP700 series power supply"
 authors = ["xiaoling <samuel.ling.xiao@qq.com>"]
 readme = "README.md"
