@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Support serial control for Rigol DP700 series power supply"
 authors = ["xiaoling <samuel.ling.xiao@qq.com>"]
 readme = "README.md"
-packages = [{include = "src/*"}]
+packages = [{include = "rigol_dp700/*"}]
 
 [tool.poetry.dependencies]
 python = "3.10.11"
