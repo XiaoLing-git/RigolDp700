@@ -12,7 +12,6 @@ from .models import (
     OP_INFO,
 )
 from .serial_write_read import SerialWriteRead
-from .logger import device_logger, serial_write_read_logger
 from .utils import (
     assert_channel_setup,
     assert_apply_setup,
