@@ -1,11 +1,4 @@
-import logging
-
-from src.common_commands import CommonCommandsConnection
-from src.driver import Driver
-from src.general_commands import GeneralCommandsConnection
-from src.models import Channel, WorkStatus
-from src.serial_connection import SerialConnection
-from src.serial_write_read import SerialWriteRead
+from rigol_dp700 import Driver
 
 if __name__ == '__main__':
 
