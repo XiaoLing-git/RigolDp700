@@ -1,29 +1,34 @@
 import logging
-import __main__
-from pathlib import Path
 
-# serial_connection_log =Path(__main__.__file__).parent / "serial_connection.log"
 logging.basicConfig(
-    # filename=serial_connection_log,
     format=f"%(asctime)s %(levelname)s line:%(lineno)d %(message)s",
-    level=logging.DEBUG,
+    level=logging.INFO,
 )
+# logger for serial_connection.py
+# default level is INFO,
+# if you want more detail ,try set it in main.py like below
+# serial_connection_logger.setLevel(logging.DEBUG)
 serial_connection_logger = logging.getLogger(__name__)
 
 
-# serial_write_read_log =Path(__main__.__file__).parent / "serial_write_read.log"
 logging.basicConfig(
-    #     filename=serial_write_read_log,
     format=f"%(asctime)s %(levelname)s line:%(lineno)d %(message)s",
     level=logging.INFO,
 )
+# logger for serial_write_read.py
+# default level is INFO,
+# if you want more detail ,try set it in main.py like below
+# serial_write_read_logger.setLevel(logging.DEBUG)
 serial_write_read_logger = logging.getLogger(__name__)
 
 
-# serial_write_read_log =Path(__main__.__file__).parent / "serial_write_read.log"
 logging.basicConfig(
-    #     filename=serial_write_read_log,
     format=f"%(asctime)s %(levelname)s line:%(lineno)d %(message)s",
     level=logging.INFO,
 )
+
+# logger for driver.py
+# default level is INFO,
+# if you want more detail ,try set it in main.py like below
+# device_logger.setLevel(logging.DEBUG)
 device_logger = logging.getLogger(__name__)
