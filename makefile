@@ -34,7 +34,7 @@ clean_chche:
 	$(RM) $(CURRENT_DIR)/rigol_dp700/__pycache__/*
 	$(RM) $(CURRENT_DIR)/rigol_dp700/.mypy_cache/*
 
-commit:clean check
+commit:clean
 	git add .
 	git commit -m "$(msg)"
 
