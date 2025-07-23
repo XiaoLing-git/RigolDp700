@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from enum import Enum
 from pathlib import Path
 
@@ -47,7 +49,7 @@ class Channel(Enum):
     ch1 = "CH1"
 
 
-class InformationModel(BaseModel):
+class InformationModel(BaseModel):  # type: ignore[misc]
     """
     Parse |Command:GeneralCommands.Information| response text and format the output
     """
@@ -57,7 +59,7 @@ class InformationModel(BaseModel):
     version: str
 
     @classmethod
-    def parse_str(cls, content: str):
+    def parse_str(cls, content: str) -> InformationModel:
         try:
             response: list[str] = content.strip().split(",")
             cls.model = response[1]
@@ -69,10 +71,10 @@ class InformationModel(BaseModel):
                 version=response[3].strip(),
             )
         except Exception as e:
-            raise ParseStrToModelException(e)
+            raise ParseStrToModelException(str(e))
 
 
-class SelfCheckModel(BaseModel):
+class SelfCheckModel(BaseModel):  # type: ignore[misc]
     """
     Parse |Command:GeneralCommands.Self_Check| response text and format the output
     """
@@ -80,7 +82,7 @@ class SelfCheckModel(BaseModel):
     fan: BaseStatus
 
     @classmethod
-    def parse_str(cls, content: str):
+    def parse_str(cls, content: str) -> SelfCheckModel:
         try:
             response: list[str] = content.strip().split(":")
             results: str = response[1].strip().lower()
@@ -92,10 +94,10 @@ class SelfCheckModel(BaseModel):
                 statue = BaseStatus.UNKNOWN
             return cls(fan=statue)
         except Exception as e:
-            raise ParseStrToModelException(e)
+            raise ParseStrToModelException(str(e))
 
 
-class ServiceModel(BaseModel):
+class ServiceModel(BaseModel):  # type: ignore[misc]
     """
     Parse |Command:GeneralCommands.Service| response text and format the output
     """
@@ -105,7 +107,7 @@ class ServiceModel(BaseModel):
     other: bool
 
     @classmethod
-    def parse_str(cls, content: str):
+    def parse_str(cls, content: str) -> ServiceModel:
         try:
             response: list[str] = content.strip().split(",")
 
@@ -115,10 +117,10 @@ class ServiceModel(BaseModel):
                 other=bool(int(response[2].strip())),
             )
         except Exception as e:
-            raise ParseStrToModelException(e)
+            raise ParseStrToModelException(str(e))
 
 
-class ApplyStatusModel(BaseModel):
+class ApplyStatusModel(BaseModel):  # type: ignore[misc]
     """
     Parse |Command:CommonCommands.APPLY_STATUS| response text and format the output
     """
@@ -128,7 +130,7 @@ class ApplyStatusModel(BaseModel):
     current: float
 
     @classmethod
-    def parse_str(cls, content: str, chl: Channel | None = None):
+    def parse_str(cls, content: str, chl: Channel | None = None) -> ApplyStatusModel:
         try:
             response: list[str] = content.strip().split(",")
             if len(response) != 2:
@@ -148,15 +150,15 @@ class ApplyStatusModel(BaseModel):
                 )
         except Exception as e:
             device_logger.warn(e)
-            raise ParseStrToModelException(e)
+            raise ParseStrToModelException(str(e))
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (
             f"channel={self.channel} voltage={self.voltage} V current={self.current} A"
         )
 
 
-class CurrentWorkStatusModel(BaseModel):
+class CurrentWorkStatusModel(BaseModel):  # type: ignore[misc]
     """
     Parse |Command:CommonCommands.CURRENT_STATUS| response text and format the output
     """
@@ -167,7 +169,9 @@ class CurrentWorkStatusModel(BaseModel):
     power: float
 
     @classmethod
-    def parse_str(cls, content: str, chl: Channel | None = None):
+    def parse_str(
+        cls, content: str, chl: Channel | None = None
+    ) -> CurrentWorkStatusModel:
         try:
             response: list[str] = content.strip().split(",")
             if len(response) != 3:
@@ -188,10 +192,10 @@ class CurrentWorkStatusModel(BaseModel):
                     power=float(response[2].strip()),
                 )
         except Exception as e:
-            device_logger.warn(e)
-            raise ParseStrToModelException(e)
+            device_logger.warn(str(e))
+            raise ParseStrToModelException(str(e))
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"channel={self.channel} voltage={self.voltage} V current={self.current} A power={self.power} W"
 
 

@@ -17,8 +17,8 @@ shell:
 build: clean check
 	poetry build
 
-check:format
-	$(RUN) mypy  $(CURRENT_DIR)/rigol_dp700
+check:
+	$(RUN) pre-commit run --all-files
 
 clean:clean_chche
 	$(RM) $(CURRENT_DIR)/dist

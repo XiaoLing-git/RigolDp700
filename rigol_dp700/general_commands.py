@@ -2,15 +2,14 @@ from pathlib import Path
 
 from .commands import GeneralCommands
 from .errors import ResetException
+from .logger import device_logger
 from .models import InformationModel, SelfCheckModel, ServiceModel
 from .serial_write_read import SerialWriteRead
-from .logger import device_logger
 
 CURRENT_FILE_NAME = Path(__file__).stem
 
 
 class GeneralCommandsConnection(SerialWriteRead):
-
     def get_device_information(self) -> InformationModel:
         """
         get device information
@@ -46,9 +45,7 @@ class GeneralCommandsConnection(SerialWriteRead):
         try:
             self.write(GeneralCommands.Reset)
         except Exception as e:
-            msg: str = (
-                f"System Error While Send Reset Command |{GeneralCommands.Reset}| msg={e}"
-            )
+            msg: str = f"System Error While Send Reset Command |{GeneralCommands.Reset}| msg={e}"
             device_logger.warn(f"{CURRENT_FILE_NAME}.{self.__class__.__name__} {msg}")
             raise ResetException(msg)
         device_logger.warn(

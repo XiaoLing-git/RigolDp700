@@ -1,12 +1,12 @@
 from pathlib import Path
 
-import serial  # type: ignore[import-untyped]
+import serial
 
 from .commands import Commands
 from .errors import SerialConnectError
+from .logger import serial_write_read_logger as logger
 from .models import COMMAND_END_TAG
 from .serial_connection import SerialConnection
-from .logger import serial_write_read_logger as logger
 
 CURRENT_FILE_NAME = Path(__file__).stem
 
