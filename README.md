@@ -8,8 +8,8 @@ https://www.rigolna.com/
 
 Before you start it, please make sure you have installed the following tools
 
-- make
-- poetry
+- make == GNU Make 4.4.1
+- poetry == 1.8.0
 
 ## Commands
 
@@ -31,7 +31,7 @@ make check
 make build
 ```
 
-### Install 
+### Install Local
 
 ```bash
 make install
@@ -53,12 +53,6 @@ make clean
 
 ```bash
 make commit msg="comments"
-```
-
-### Test
-
-```bash
-make test
 ```
 
 ### debug
