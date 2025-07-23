@@ -10,9 +10,6 @@ Before you start it, please make sure you have installed the following tools
 
 - make
 - poetry
-- black
-- mypy
-- ruff
 
 ## Commands
 

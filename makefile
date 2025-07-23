@@ -9,8 +9,6 @@ install:
 shell:
 	poetry shell
 
-depend:shell
-	poetry run pip install -r .\requirements.txt
 
 build: clean
 	poetry build
@@ -18,10 +16,10 @@ build: clean
 check:format
 	poetry run mypy  $(CURRENT_DIR)/rigol_dp700
 
-clean:clean_pychche
+clean:clean_chche
 	rm -rf $(CURRENT_DIR)/dist
 
-clean_pychche:
+clean_chche:
 	rm -rf $(CURRENT_DIR)/__pycache__
 	rm -rf $(CURRENT_DIR)/.mypy_cache
 	rm -rf $(CURRENT_DIR)/__pycache__/*
@@ -32,7 +30,7 @@ clean_pychche:
 	rm -rf $(CURRENT_DIR)/rigol_dp700/__pycache__/*
 	rm -rf $(CURRENT_DIR)/rigol_dp700/.mypy_cache/*
 
-commit:clean format check
+commit:clean check
 	git add .
 	git commit -m "$(msg)"
 
