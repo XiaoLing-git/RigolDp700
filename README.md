@@ -37,7 +37,7 @@ make build
 make install
 ```
 
-### Enter Venv 
+### Enter Venv
 
 ```bash
 make shell
@@ -113,6 +113,3 @@ if __name__ == '__main__':
 
 
 ```
-
-
-

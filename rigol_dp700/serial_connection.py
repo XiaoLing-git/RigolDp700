@@ -1,15 +1,14 @@
 from pathlib import Path
 
-import serial  # type: ignore[import-untyped]
+import serial
 
-from .models import RESPONSE_END_TAG
 from .logger import serial_connection_logger
+from .models import RESPONSE_END_TAG
 
 CURRENT_FILE_NAME = Path(__file__).stem
 
 
 class SerialConnection:
-
     def __init__(
         self,
         port: str,
@@ -46,7 +45,7 @@ class SerialConnection:
         )
         return response
 
-    def write(self, content: bytes):
+    def write(self, content: bytes) -> None:
         serial_connection_logger.debug(
             f"{CURRENT_FILE_NAME}.{self.__class__.__name__} Send: {content!r}"
         )

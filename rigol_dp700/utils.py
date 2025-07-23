@@ -1,6 +1,6 @@
-from .errors import ChannelNotExistException, ApplySetupError
-from .models import Channel, MAX_CURRENT, MIN_CURRENT, MIN_VOLTAGE, MAX_VOLTAGE
+from .errors import ApplySetupError, ChannelNotExistException
 from .logger import device_logger
+from .models import MAX_CURRENT, MAX_VOLTAGE, MIN_CURRENT, MIN_VOLTAGE, Channel
 
 
 def assert_channel_setup(chl: str | Channel) -> str:
@@ -18,7 +18,7 @@ def assert_channel_setup(chl: str | Channel) -> str:
     raise ChannelNotExistException(error_msg)
 
 
-def assert_apply_setup(current: float, voltage: float):
+def assert_apply_setup(current: float, voltage: float) -> None:
     """
     Setting value verification
     :param current: 0 < value 5.3 A
@@ -35,7 +35,7 @@ def assert_apply_setup(current: float, voltage: float):
     raise ApplySetupError(error_msg)
 
 
-def assert_ocp_setup(current: float):
+def assert_ocp_setup(current: float) -> None:
     """
     Setting value verification
     :param current: 0 < value 5.3 A
@@ -51,7 +51,7 @@ def assert_ocp_setup(current: float):
     raise ApplySetupError(error_msg)
 
 
-def assert_ovp_setup(voltage: float):
+def assert_ovp_setup(voltage: float) -> None:
     """
     Setting value verification
     :param voltage: 0 < value 32 V

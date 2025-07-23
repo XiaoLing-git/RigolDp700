@@ -3,17 +3,17 @@ from pathlib import Path
 from .commands import CommonCommands
 from .errors import ClearAlarmException
 from .models import (
+    OP_INFO,
+    AlarmStatus,
+    ApplyStatusModel,
     Channel,
     CurrentWorkStatusModel,
-    ApplyStatusModel,
     WorkStatus,
-    AlarmStatus,
-    OP_INFO,
 )
 from .serial_write_read import SerialWriteRead
 from .utils import (
-    assert_channel_setup,
     assert_apply_setup,
+    assert_channel_setup,
     assert_ocp_setup,
     assert_ovp_setup,
 )
@@ -22,7 +22,6 @@ CURRENT_FILE_NAME = Path(__file__).stem
 
 
 class CommonCommandsConnection(SerialWriteRead):
-
     def apply_status(self) -> ApplyStatusModel:
         """
         get apply status
@@ -226,7 +225,7 @@ class CommonCommandsConnection(SerialWriteRead):
             },
         }
 
-    def ocp_setup(self, setup: float, chl: str | Channel = Channel.ch1):
+    def ocp_setup(self, setup: float, chl: str | Channel = Channel.ch1) -> float:
         """
         proset ocp value
         :param setup:
@@ -239,7 +238,7 @@ class CommonCommandsConnection(SerialWriteRead):
         self.write(cmd)
         return self.get_ocp_value()
 
-    def ovp_setup(self, setup: float, chl: str | Channel = Channel.ch1):
+    def ovp_setup(self, setup: float, chl: str | Channel = Channel.ch1) -> float:
         """
         proset ovp value
         :param setup:
@@ -252,7 +251,7 @@ class CommonCommandsConnection(SerialWriteRead):
         self.write(cmd)
         return self.get_ocp_value()
 
-    def turn_ocp_on(self, chl: str | Channel = Channel.ch1):
+    def turn_ocp_on(self, chl: str | Channel = Channel.ch1) -> WorkStatus:
         """
         turn on ocp function
         :param chl:
@@ -263,7 +262,7 @@ class CommonCommandsConnection(SerialWriteRead):
         self.write(cmd)
         return self.get_ocp_status()
 
-    def turn_ocp_off(self, chl: str | Channel = Channel.ch1):
+    def turn_ocp_off(self, chl: str | Channel = Channel.ch1) -> WorkStatus:
         """
         turn off ocp function
         :param chl:
@@ -274,7 +273,7 @@ class CommonCommandsConnection(SerialWriteRead):
         self.write(cmd)
         return self.get_ocp_status()
 
-    def turn_ovp_on(self, chl: str | Channel = Channel.ch1):
+    def turn_ovp_on(self, chl: str | Channel = Channel.ch1) -> WorkStatus:
         """
         turn on ovp function
         :param chl:
@@ -285,7 +284,7 @@ class CommonCommandsConnection(SerialWriteRead):
         self.write(cmd)
         return self.get_ocp_status()
 
-    def turn_ovp_off(self, chl: str | Channel = Channel.ch1):
+    def turn_ovp_off(self, chl: str | Channel = Channel.ch1) -> WorkStatus:
         """
         turn off ovp function
         :param chl:
@@ -312,7 +311,7 @@ class CommonCommandsConnection(SerialWriteRead):
         ocp_alarm = response["ocp"]["alarm"]
 
         if ocp_alarm is AlarmStatus.Yes:
-            raise ClearAlarmException(f"Clear OCP Alarm Fail")
+            raise ClearAlarmException("Clear OCP Alarm Fail")
         if ovp_alarm is AlarmStatus.Yes:
-            raise ClearAlarmException(f"Clear OVP Alarm Fail")
+            raise ClearAlarmException("Clear OVP Alarm Fail")
         return

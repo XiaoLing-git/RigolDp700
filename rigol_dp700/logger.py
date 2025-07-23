@@ -1,7 +1,7 @@
 import logging
 
 logging.basicConfig(
-    format=f"%(asctime)s %(levelname)s line:%(lineno)d %(message)s",
+    format="%(asctime)s %(levelname)s line:%(lineno)d %(message)s",
     level=logging.INFO,
 )
 # logger for serial_connection.py
@@ -12,7 +12,7 @@ serial_connection_logger = logging.getLogger(__name__)
 
 
 logging.basicConfig(
-    format=f"%(asctime)s %(levelname)s line:%(lineno)d %(message)s",
+    format="%(asctime)s %(levelname)s line:%(lineno)d %(message)s",
     level=logging.INFO,
 )
 # logger for serial_write_read.py
@@ -23,7 +23,7 @@ serial_write_read_logger = logging.getLogger(__name__)
 
 
 logging.basicConfig(
-    format=f"%(asctime)s %(levelname)s line:%(lineno)d %(message)s",
+    format="%(asctime)s %(levelname)s line:%(lineno)d %(message)s",
     level=logging.INFO,
 )
 
